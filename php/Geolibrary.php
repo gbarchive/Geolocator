@@ -8,7 +8,7 @@
 
       // loads the data for $ip in to an array and returns it.
       function get($ip) {
-
+        trigger_error("Geolibrary get called on non-defined class."); 
       }
 
       // stores the data internal to class
@@ -41,6 +41,9 @@
         return true;
       }
 
+      function checkOnline($url, $port=80) {
+        return (@fsockopen($url, $port, $err, $errs, 2) !== false);
+      }
       function fetchURL($url, $userAgent="Mozilla/5.0 (Windows; U; MSIE 9.0; Windows NT 9.0; en-US)") {
         if(function_exists('curl_init')) {
           $ch = curl_init();

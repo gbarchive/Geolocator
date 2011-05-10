@@ -4,7 +4,7 @@
     require_once dirname(__FILE__) . "/../Geolibrary.php";
     class Ipinfodb extends Geolibrary {
         function isAvailable() {
-          return (strlen(IPINFODB_API_KEY) > 1);
+          return (strlen(IPINFODB_API_KEY) > 1) && ($this->checkOnline("api.ipinfodb.com"));
         }
 
         function get($ip) {

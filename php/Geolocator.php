@@ -1,19 +1,16 @@
 <?php
-/* 
-vim: tabstop=2:softtabstop=2:shiftwidth=2:noexpandtab 
-*/
 
 	// should support standardizing case.
 
 	require_once "Geolibrary.php";
 	require_once "libraries/Maxmind_city.php";
 	require_once "libraries/Geoplugin.php";
-	require_once "libraries/Ipinfodb.php";
+  require_once "libraries/Ipinfodb.php";
 
   class Geolocator {
     var $priority = array('maxmind_city', 
                           'geoplugin',
-													'ipinfodb');
+                          'ipinfodb');
 
 		var $classes = array();
 		function Geolocator($priority=null) {
@@ -35,8 +32,4 @@ vim: tabstop=2:softtabstop=2:shiftwidth=2:noexpandtab
 			}			
 		}
   }
-
-	
-	$geoloc = new Geolocator();
-	var_dump($geoloc->getCity("174.4.82.113"));
 ?>

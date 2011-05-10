@@ -2,7 +2,7 @@
     require_once dirname(__FILE__) . "/../Geolibrary.php";
     class Geoplugin extends Geolibrary {
         function isAvailable() {
-          return true; // later fail if geoplugin.net is offline.
+          return $this->checkOnline("www.geoplugin.net"); // later fail if geoplugin.net is offline.
         }
 
         function get($ip) {
