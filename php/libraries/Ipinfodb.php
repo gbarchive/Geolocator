@@ -1,5 +1,5 @@
 <?php
-    define("IPINFODB_API_KEY", "78a12aef5a6ad02c2f618b89c004a64785df1333228c4715ab3c907e3b2bbbf8"); // you must get an API key from http://www.ipinfodb.com/ip_location_api.php
+    define("IPINFODB_API_KEY", ""); // you must get an API key from http://www.ipinfodb.com/ip_location_api.php
 
     require_once dirname(__FILE__) . "/../Geolibrary.php";
     class Ipinfodb extends Geolibrary {
