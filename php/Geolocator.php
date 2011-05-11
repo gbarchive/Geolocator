@@ -10,7 +10,10 @@
                             'geoplugin');
 
     var $classes = array();
-    var $settings = array("case"=>"ucfirst", 
+    var $settings = array("case"=>array(
+                                "getCountryCode"=>"strtoupper",
+                                "*"=>"ucfirst" 
+                            ), 
                             "checkAvailable"=>true, 
                             "cache"=>true,
                             "debug"=>false);
@@ -41,12 +44,29 @@
             if(!$this->settings['checkAvailable'] || $this->classes[$choice]->isAvailable()) {
                 $this->_debug("{$choice} available.");
 
+                // cache if required.
                 if($this->settings['cache']) $this->classes[$choice]->cache($ip);
 
                 $result = $this->classes[$choice]->$classMethod($ip);
                 $this->_debug("Got response {$result}.");
-                if($result !== false) {
-                    if($this->settings['case'] != "") $result = $this->settings['case']($result);
+                if($result !== false) {             
+
+                    // handle autocasing
+                    if(isset($this->settings['case'])) {
+                        if(is_array($this->settings['case'])) {
+                            if(isset($this->settings['case'][$classMethod])) {
+                                $caseMethod = $this->settings['case'][$classMethod];
+                            } else {
+                                $caseMethod = $this->settings['case']['*'];
+                            }
+                        } else {    // if its not an array, assume its a method
+                            $caseMethod = $this->settings['case'];
+                        }
+                    }
+
+                    if(isset($caseMethod) && function_exists($caseMethod)) 
+                        $result = $caseMethod($result);
+
                     $this->_debug("Returning {$result}.");
                     return $result;
                 }
