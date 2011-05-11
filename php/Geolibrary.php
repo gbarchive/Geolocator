@@ -15,7 +15,7 @@
       function cache($ip) {
         if(!$this->invalidIPCheck($ip)) return false;
 
-        $data = get($ip);
+        $data = $this->get($ip);
         $this->_cache[ip2long($ip)]=$data;
         return $data;
       }
